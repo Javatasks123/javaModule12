@@ -81,4 +81,18 @@ public class IntegerDecodeTests {
             Integer.decode("2147483648");
         }, "Должно выбросить NumberFormatException при переполнении.");
     }
+
+    // Сценарий 12: Большое отрицательное число — триггерит catch, но возвращает Integer.MIN_VALUE
+    @Test
+    void test12_NegativeMinBoundary() {
+        assertEquals(Integer.MIN_VALUE, Integer.decode("-2147483648"),
+                "Должно декодировать '-2147483648' как Integer.MIN_VALUE.");
+    }
+
+    // Сценарий 13: Шестнадцатеричное с заглавным X (0X)
+    @Test
+    void test13_HexPrefix0XUppercase() {
+        // 0X1A = 26
+        assertEquals(26, Integer.decode("0X1A"), "Должно декодировать '0X1A' как 26.");
+    }
 }
